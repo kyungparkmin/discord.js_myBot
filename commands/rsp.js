@@ -10,49 +10,65 @@ module.exports = {
     const row = new MessageActionRow()
       .addComponents(
         new MessageButton()
-          .setCustomId("scissors")
+          .setCustomId("가위")
           .setLabel("가위")
           .setStyle('PRIMARY'),
       )
       .addComponents(
         new MessageButton()
-          .setCustomId("rock")
+          .setCustomId("바위")
           .setLabel("바위")
           .setStyle('SECONDARY'),
       )
       .addComponents(
         new MessageButton()
-          .setCustomId("paper")
+          .setCustomId("보")
           .setLabel("보")
           .setStyle('DANGER'),
       )
-    await interaction.reply({components: [row], ephemeral: true});
+    const message = await interaction.reply({components: [row], ephemeral: true});
 
-    const filter = i => i.customId === 'rock' || i.customId === 'paper' || i.customId === 'scissors';
+    const filter = i => i.customId === '가위' || i.customId === '바위' || i.customId === '보';
     
     const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
 
     const random = Math.floor(Math.random() * 3);
-    const rsp = ["scissors", "rock", "paper"];
+    const rsp = ["가위", "바위", "보"];
     const bot = rsp[random];
-    let winner;
 
       
     collector.on('collect', async i => {
-      if (i.customId === 'rock' && bot == "paper") {
-        await i.reply({ content: 'bot win', ephemeral: true});
-      }else if(i.customId === 'paper' && bot == "scissors") {
-        await i.reply({ content: 'bot win'});
-      }else if(i.customId === "scissors" && bot == "rock"){
-        await i.reply({ content: "bot win"});
+      const wait = require('util').promisify(setTimeout);
+      if (i.customId === '바위' && bot == "보") {
+        await i.deferUpdate();
+		    await wait(500);
+		    await i.editReply({ content: `유저: ${i.customId}\n봇: ${bot}\n패배`, components: []});
+      }else if(i.customId === '보' && bot == "가위") {
+        await i.deferUpdate();
+        await wait(500);
+        await i.editReply({ content: `유저: ${i.customId}\n봇: ${bot}\n패배`, components: []});
+      }else if(i.customId === "가위" && bot == "바위"){
+        await i.deferUpdate();
+        await wait(500);
+        await i.editReply({ content: `유저: ${i.customId}\n봇: ${bot}\n패배`, components: []});
       }else if(i.customId == bot){
-        await i.reply({ content: "draw", ephemeral: true});
+        await i.deferUpdate();
+        await wait(500);
+        await i.editReply({ content: `유저: ${i.customId}\n봇: ${bot}\n무승부`, components: []});
       }else{
-        await i.reply({ content: "you win" });
+        await i.deferUpdate();
+		    await wait(3000);
+		    await i.editReply({ content: `유저: ${i.customId}\n봇: ${bot}\n승리`, components: []});
       }
     });
-
-    collector.on('end', collected => console.log(`Collected ${collected.size} items`));
+    
+    collector.on('end', collected => {
+      console.log(`Collected ${collected.size} items`);
+      if(`${collected.size}` === 1){
+        setTimeout(() => channel.messages.delete('message'), 1000);
+      }
+    })
+    
 
   },
 };
