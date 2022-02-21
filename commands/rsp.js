@@ -41,8 +41,8 @@ module.exports = {
       const wait = require('util').promisify(setTimeout);
       if (i.customId === '바위' && bot == "보") {
         await i.deferUpdate();
-		    await wait(500);
-		    await i.editReply({ content: `유저: ${i.customId}\n봇: ${bot}\n패배`, components: []});
+	await wait(500);
+	await i.editReply({ content: `유저: ${i.customId}\n봇: ${bot}\n패배`, components: []});
       }else if(i.customId === '보' && bot == "가위") {
         await i.deferUpdate();
         await wait(500);
@@ -57,8 +57,8 @@ module.exports = {
         await i.editReply({ content: `유저: ${i.customId}\n봇: ${bot}\n무승부`, components: []});
       }else{
         await i.deferUpdate();
-		    await wait(3000);
-		    await i.editReply({ content: `유저: ${i.customId}\n봇: ${bot}\n승리`, components: []});
+	await wait(3000);
+	await i.editReply({ content: `유저: ${i.customId}\n봇: ${bot}\n승리`, components: []});
       }
     });
     
