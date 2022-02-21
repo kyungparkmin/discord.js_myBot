@@ -20,7 +20,21 @@ client.once("ready", () => {
 
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isCommand()) return;
+  if(interaction.isCommand()){
+    var userJsonFile = './data/userData.json';
+    var userData = JSON.parse(fs.readFileSync(userJsonFile), "utf-8");
 
+    const userId = interaction.member.user.id;
+    const userName = interaction.member.user.username;
+    
+    if(!userData.users[userId]){
+      userData.users[userId] = {
+        name: userName,
+        point: 0
+      };
+      fs.writeFileSync(userJsonFile, JSON.stringify(userData));
+    }
+  }
   const command = client.commands.get(interaction.commandName);
 
   if (!command) return;

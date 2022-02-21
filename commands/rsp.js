@@ -1,5 +1,6 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
 const { MessageActionRow, MessageButton } = require('discord.js');
+const wait = require('util').promisify(setTimeout);
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -17,27 +18,37 @@ module.exports = {
         new MessageButton()
           .setCustomId("rock")
           .setLabel("바위")
-          .setStyle('SECONDARY')
+          .setStyle('SECONDARY'),
       )
       .addComponents(
         new MessageButton()
           .setCustomId("paper")
           .setLabel("보")
-          .setStyle('DANGER')
+          .setStyle('DANGER'),
       )
-    await interaction.reply({components: [row]});
+    await interaction.reply({components: [row], ephemeral: true});
 
     const filter = i => i.customId === 'rock' || i.customId === 'paper' || i.customId === 'scissors';
-
+    
     const collector = interaction.channel.createMessageComponentCollector({ filter, time: 15000 });
 
+    const random = Math.floor(Math.random() * 3);
+    const rsp = ["scissors", "rock", "paper"];
+    const bot = rsp[random];
+    let winner;
+
+      
     collector.on('collect', async i => {
-      if (i.customId === 'rock') {
-        await i.reply({ content: 'rock', components: [] });
-      }else if(i.customId === 'paper') {
-        await i.reply({ content: 'paper'});
+      if (i.customId === 'rock' && bot == "paper") {
+        await i.reply({ content: 'bot win', ephemeral: true});
+      }else if(i.customId === 'paper' && bot == "scissors") {
+        await i.reply({ content: 'bot win'});
+      }else if(i.customId === "scissors" && bot == "rock"){
+        await i.reply({ content: "bot win"});
+      }else if(i.customId == bot){
+        await i.reply({ content: "draw", ephemeral: true});
       }else{
-        await i.reply({content: 'scissors'});
+        await i.reply({ content: "you win" });
       }
     });
 
