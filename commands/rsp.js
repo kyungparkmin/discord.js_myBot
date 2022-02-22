@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const { MessageActionRow, MessageButton } = require('discord.js');
+const { MessageActionRow, MessageButton, MessageEmbed } = require('discord.js');
 const wait = require('util').promisify(setTimeout);
 
 module.exports = {
@@ -35,7 +35,6 @@ module.exports = {
     const random = Math.floor(Math.random() * 3);
     const rsp = ["가위", "바위", "보"];
     const bot = rsp[random];
-
       
     collector.on('collect', async i => {
       const wait = require('util').promisify(setTimeout);
@@ -57,8 +56,8 @@ module.exports = {
         await i.editReply({ content: `유저: ${i.customId}\n봇: ${bot}\n무승부`, components: []});
       }else{
         await i.deferUpdate();
-		    await wait(3000);
-		    await i.editReply({ content: `유저: ${i.customId}\n봇: ${bot}\n승리`, components: []});
+		    await wait(500);
+		    await i.editReply({ content: `유저: ${i.customId}\n봇: ${bot}\n승리\n포인트: ${point}`, components: []});
       }
     });
     
@@ -68,7 +67,5 @@ module.exports = {
         setTimeout(() => channel.messages.delete('message'), 1000);
       }
     })
-    
-
   },
 };

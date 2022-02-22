@@ -14,6 +14,9 @@
     "@discordjs/rest": "^0.3.0",
     "discord-api-types": "^0.27.2",
     "discord.js": "^13.6.0",
+    "genius-lyrics": "^4.3.5",
+    "genius-lyrics-api": "^3.2.0",
+    "musixmatch": "^0.1.6",
     "mysql": "^2.18.1",
     "nodemon": "^2.0.15"
   }
