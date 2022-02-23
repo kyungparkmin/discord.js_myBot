@@ -37,7 +37,6 @@ module.exports = {
     const bot = rsp[random];
       
     collector.on('collect', async i => {
-      const wait = require('util').promisify(setTimeout);
       if (i.customId === '바위' && bot == "보") {
         await i.deferUpdate();
 		    await wait(500);
