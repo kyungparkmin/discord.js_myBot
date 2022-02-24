@@ -61,10 +61,7 @@ module.exports = {
     });
     
     collector.on('end', collected => {
-      console.log(`Collected ${collected.size} items`);
-      if(`${collected.size}` === 1){
-        setTimeout(() => channel.messages.delete('message'), 1000);
-      }
+      //console.log(`Collected ${collected.size} items`);
     })
   },
 };
