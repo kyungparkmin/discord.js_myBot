@@ -56,7 +56,7 @@ module.exports = {
       }else{
         await i.deferUpdate();
 		    await wait(500);
-		    await i.editReply({ content: `유저: ${i.customId}\n봇: ${bot}\n승리\n포인트: ${point}`, components: []});
+		    await i.editReply({ content: `유저: ${i.customId}\n봇: ${bot}\n승리`, components: []});
       }
     });
     
