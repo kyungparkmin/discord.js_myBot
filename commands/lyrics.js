@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require("@discordjs/builders");
-const fs = require("fs");
+//const fs = require("fs");
 const { geniusApi } = require("../config.json");
 const Genius = require("genius-lyrics");
 const Client = new Genius.Client(geniusApi);
