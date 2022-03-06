@@ -20,7 +20,9 @@
     "genius-lyrics-api": "^3.2.0",
     "musixmatch": "^0.1.6",
     "mysql": "^2.18.1",
+    "neis": "^0.5.1",
     "node-fetch": "^2.6.7",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "school-kr": "^3.1.2"
   }
 }

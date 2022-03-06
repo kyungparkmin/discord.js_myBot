@@ -20,7 +20,8 @@ module.exports = {
           '4교시: 프언\n' + 
           '5교시: 수학1\n' +
           '6교시: 프언\n' +
-          '7교시: 프언\n'
+          '7교시: 프언\n' + 
+          '준비물: 체육복, 운동화'
         )
         interaction.reply({ embeds: [MonDay] })
     }else if(days[date.getDay()] == "화"){
@@ -46,7 +47,8 @@ module.exports = {
           '4교시: 수학1\n' + 
           '5교시: 실용국어\n' +
           '6교시: 한국사\n' +
-          '7교시: 운건\n'
+          '7교시: 운건\n' + 
+          '준비물: 체육복, 운동화'
         )
         interaction.reply({ embeds: [Wednesday] })
     }else if(days[date.getDay()] == "목"){
